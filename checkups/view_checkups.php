@@ -42,10 +42,13 @@ $result = mysqli_query($conn, "SELECT * FROM checkups ORDER BY date DESC");
             <td><?= htmlspecialchars($row['symptoms']) ?></td>
             <td><?= htmlspecialchars($row['history']) ?></td>
             <td><?= $row['date'] ?></td>
-            <td>
-                <a href="edit_checkup.php?id=<?= $row['id'] ?>" class="button">Edit</a>
-                <a href="delete_checkup.php?id=<?= $row['id'] ?>" class="button" onclick="return confirm('Delete this checkup?');">Delete</a>
-            </td>
+           <td>
+    <a href="edit_checkup.php?id=<?= $row['id'] ?>" class="button">Edit</a>
+    <a href="delete_checkup.php?id=<?= $row['id'] ?>" class="button" onclick="return confirm('Delete this checkup?');">Delete</a>
+    <a href="prescriptions.php?checkup_id=<?= $row['id'] ?>" class="button" style="background-color:#28a745;">Prescriptions</a>
+    <a href="billing.php?checkup_id=<?= $row['id'] ?>" class="button" style="background-color:#ffc107; color:black;">Billing</a>
+</td>
+
         </tr>
     <?php } ?>
 </table>
