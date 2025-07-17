@@ -52,7 +52,11 @@ $medicine = $result->fetch_assoc();
 <html>
 <head>
     <title>Edit Medicine</title>
+<<<<<<< HEAD
     <style>
+=======
+     <style>
+>>>>>>> 8783693 (Updated add, edit, view medicine files and SQL with inline CSS)
         body {
             font-family: 'Segoe UI', sans-serif;
             background-color: #d0e7ff; /* Light blue */
