@@ -16,9 +16,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             VALUES ('$name', '$category', '$quantity', '$price')";
 
     if ($conn->query($sql) === TRUE) {
-        echo "✅ Medicine added successfully!";
+        echo "<p style='color: green; font-weight: bold;'>✅ Medicine added successfully!</p>";
     } else {
-        echo "❌ Error: " . $conn->error;
+        echo "<p style='color: red; font-weight: bold;'>❌ Error: " . $conn->error . "</p>";
     }
 }
 ?>
@@ -27,73 +27,82 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 <html>
 <head>
     <title>Add Medicine</title>
-     <style>
+    <style>
         body {
-            background-color: #d0ebff;
             font-family: Arial, sans-serif;
+            background-color: #f2f7ff;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
         }
 
         .form-container {
-            background-color: white;
-            width: 400px;
+            background-color: #ffffff;
             padding: 30px;
-            margin: 100px auto;
             border-radius: 10px;
-            box-shadow: 0 0 15px rgba(0,0,0,0.2);
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            width: 400px;
         }
 
-        .form-container h2 {
+        h2 {
             text-align: center;
-            color: #0077b6;
+            color: #2c3e50;
+            margin-bottom: 20px;
         }
 
         label {
-            display: block;
-            margin-top: 15px;
+            font-weight: bold;
+            color: #333;
         }
 
-        input[type="text"], input[type="number"], select {
+        input[type="text"],
+        input[type="number"] {
             width: 100%;
-            padding: 8px;
-            margin-top: 5px;
-            border: 1px solid #ccc;
-            border-radius: 5px;
-        }
-
-        input[type="submit"] {
-            margin-top: 20px;
-            width: 100%;
-            background-color: #0077b6;
-            color: white;
             padding: 10px;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
+            margin-top: 5px;
+            margin-bottom: 20px;
+            border: 1px solid #ccc;
+            border-radius: 6px;
+            font-size: 16px;
         }
 
-        .message {
-            text-align: center;
-            color: green;
-            margin-top: 10px;
+        button {
+            width: 100%;
+            background-color: #3498db;
+            color: white;
+            padding: 12px;
+            border: none;
+            border-radius: 6px;
+            font-size: 16px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        button:hover {
+            background-color: #2980b9;
         }
     </style>
 </head>
 <body>
-    <h2>Add Medicine</h2>
-    <form method="POST">
-        <label>Name:</label><br>
-        <input type="text" name="name" required><br><br>
+    <div class="form-container">
+        <h2>Add Medicine</h2>
+        <form method="POST">
+            <label>Name:</label>
+            <input type="text" name="name" required>
 
-        <label>Category:</label><br>
-        <input type="text" name="category" required><br><br>
+            <label>Category:</label>
+            <input type="text" name="category" required>
 
-        <label>Quantity:</label><br>
-        <input type="number" name="quantity" required><br><br>
+            <label>Quantity:</label>
+            <input type="number" name="quantity" required>
 
-        <label>Price (₹):</label><br>
-        <input type="number" step="0.01" name="price" required><br><br>
+            <label>Price (₹):</label>
+            <input type="number" step="0.01" name="price" required>
 
-        <button type="submit">Add Medicine</button>
-    </form>
+            <button type="submit">Add Medicine</button>
+        </form>
+    </div>
 </body>
 </html>
+
