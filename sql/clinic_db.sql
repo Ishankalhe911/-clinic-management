@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jul 16, 2025 at 07:35 PM
+-- Generation Time: Jul 17, 2025 at 10:08 PM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -63,6 +63,27 @@ INSERT INTO `checkups` (`id`, `patient_id`, `symptoms`, `history`, `report_path`
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `medicines`
+--
+
+CREATE TABLE `medicines` (
+  `id` int(11) NOT NULL,
+  `name` varchar(100) DEFAULT NULL,
+  `price` decimal(10,2) DEFAULT NULL,
+  `stock` int(11) DEFAULT NULL,
+  `medicine_id` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `medicines`
+--
+
+INSERT INTO `medicines` (`id`, `name`, `price`, `stock`, `medicine_id`) VALUES
+(1, '	Amoxicillin', 40.00, 50, 0);
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `patients`
 --
 
@@ -90,10 +111,20 @@ INSERT INTO `patients` (`id`, `name`, `email`, `phone`, `address`) VALUES
 CREATE TABLE `prescriptions` (
   `id` int(11) NOT NULL,
   `checkup_id` int(11) DEFAULT NULL,
+  `medicine_id` int(11) NOT NULL,
   `medicine_name` varchar(100) DEFAULT NULL,
   `dosage` varchar(50) DEFAULT NULL,
-  `duration` varchar(50) DEFAULT NULL
+  `duration` varchar(50) DEFAULT NULL,
+  `quantity` int(11) NOT NULL DEFAULT 1
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `prescriptions`
+--
+
+INSERT INTO `prescriptions` (`id`, `checkup_id`, `medicine_id`, `medicine_name`, `dosage`, `duration`, `quantity`) VALUES
+(1, 1, 1, NULL, NULL, NULL, 1),
+(2, 2, 1, NULL, NULL, NULL, 1);
 
 -- --------------------------------------------------------
 
@@ -122,6 +153,12 @@ ALTER TABLE `billing`
 -- Indexes for table `checkups`
 --
 ALTER TABLE `checkups`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `medicines`
+--
+ALTER TABLE `medicines`
   ADD PRIMARY KEY (`id`);
 
 --
@@ -159,6 +196,12 @@ ALTER TABLE `checkups`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
+-- AUTO_INCREMENT for table `medicines`
+--
+ALTER TABLE `medicines`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
 -- AUTO_INCREMENT for table `patients`
 --
 ALTER TABLE `patients`
@@ -168,7 +211,7 @@ ALTER TABLE `patients`
 -- AUTO_INCREMENT for table `prescriptions`
 --
 ALTER TABLE `prescriptions`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `reports`
