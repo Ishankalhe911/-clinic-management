@@ -223,3 +223,22 @@ COMMIT;
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
+-- --------------------------------------------------------
+
+-- Table structure for table `medicines`
+
+CREATE TABLE `medicines` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `name` varchar(100) NOT NULL,
+  `type` varchar(50) DEFAULT NULL,
+  `dosage` varchar(50) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- Dumping data for table `medicines`
+
+INSERT INTO `medicines` (`name`, `type`, `dosage`) VALUES
+('Dolo', 'Tablet', '650mg'),
+('Paracetamol', 'Tablet', '500mg'),
+('Crosin', 'Tablet', '500mg'),
+('Zerodol-P', 'Tablet', '100mg');

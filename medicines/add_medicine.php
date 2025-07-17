@@ -48,4 +48,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 </body>
 </html>
 
+<<<<<<< HEAD
    
+=======
+
+>>>>>>> bc6bd86 (Added medicine functionality)
