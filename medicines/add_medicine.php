@@ -27,6 +27,56 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 <html>
 <head>
     <title>Add Medicine</title>
+     <style>
+        body {
+            background-color: #d0ebff;
+            font-family: Arial, sans-serif;
+        }
+
+        .form-container {
+            background-color: white;
+            width: 400px;
+            padding: 30px;
+            margin: 100px auto;
+            border-radius: 10px;
+            box-shadow: 0 0 15px rgba(0,0,0,0.2);
+        }
+
+        .form-container h2 {
+            text-align: center;
+            color: #0077b6;
+        }
+
+        label {
+            display: block;
+            margin-top: 15px;
+        }
+
+        input[type="text"], input[type="number"], select {
+            width: 100%;
+            padding: 8px;
+            margin-top: 5px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        input[type="submit"] {
+            margin-top: 20px;
+            width: 100%;
+            background-color: #0077b6;
+            color: white;
+            padding: 10px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .message {
+            text-align: center;
+            color: green;
+            margin-top: 10px;
+        }
+    </style>
 </head>
 <body>
     <h2>Add Medicine</h2>
