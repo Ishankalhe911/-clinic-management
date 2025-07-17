@@ -1,15 +1,45 @@
-<?php include '../session.php';
-$conn = new mysqli("localhost", "root", "", "clinic");
-
-$today = date('Y-m-d');
-if ($_SESSION['role'] == 'receptionist') {
-  $result = $conn->query("SELECT * FROM appointments WHERE appointment_date >= '$today'");
-} else {
-  // patient view
-  $result = $conn->query("SELECT * FROM appointments WHERE appointment_date >= '$today' AND patient_id='$_SESSION[patient_id]'");
-}
-
-while ($row = $result->fetch_assoc()) {
-  echo "{$row['doctor_name']} on {$row['appointment_date']} at {$row['appointment_time']} [Status: {$row['status']}]";
-}
+<?php
+include 'datafunction.php';
+if (isset($_POST['save'])) {
+    $username = $_POST['username'];
+    $passwords = $_POST['passwords'];
+    $query = "SELECT * FROM Receptionist WHERE username='$username' AND passwords='$passwords' ";
+    $query_run = mysqli_query($conn, $query);
+    if (mysqli_num_rows($query_run) > 0) {
 ?>
+        <?php
+        include 'datafunction.php';
+
+        $result = mysqli_query($conn, "SELECT * FROM appointments");
+        ?>
+
+        <table border="1">
+            <link href="tableres.css" rel="stylesheet">
+            <tr>
+                <th>ID</th>
+                <th>Patient Name</th>
+                <th>Doctor Name</th>
+                <th>Date</th>
+                <th>Time</th>
+                <th>Actions</th>
+            </tr>
+
+            <?php while ($row = mysqli_fetch_assoc($result)) { ?>
+                <tr>
+                    <td><?= $row['id'] ?></td>
+                    <td><?= $row['patient_name'] ?></td>
+                    <td><?= $row['doctor'] ?></td>
+                    <td><?= $row['date_a'] ?></td>
+                    <td><?= $row['time_a'] ?></td>
+                    <td>
+                        <a href="edit.php?id=<?= $row['id'] ?>">Edit</a> |
+                        <a href="delete.php?id=<?= $row['id'] ?>" onclick="return confirm('Are you sure you want to delete this appointment?');">Delete</a>
+                    </td>
+                </tr>
+    <?php }
+        } else {
+            echo "<b>invalid username or password</b>";
+        }
+    }
+    ?>
+        </table>

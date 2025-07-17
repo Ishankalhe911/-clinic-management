@@ -1,17 +1,59 @@
-<?php include '../session.php'; $conn = new mysqli("localhost", "root", "", "clinic");
-$id = $_GET['id'];
-$row = $conn->query("SELECT * FROM appointments WHERE id=$id")->fetch_assoc();
-?>
-
-<form method="POST">
-  New Date: <input type="date" name="date" value="<?= $row['appointment_date'] ?>"><br>
-  New Time: <input type="time" name="time" value="<?= $row['appointment_time'] ?>"><br>
-  <input type="submit" value="Update">
-</form>
-
 <?php
-if ($_POST) {
-  $conn->query("UPDATE appointments SET appointment_date='$_POST[date]', appointment_time='$_POST[time]', status='Rescheduled' WHERE id=$id");
-  echo "Appointment Updated";
+include 'datafunction.php';
+$id = $_GET['id'];
+$result = mysqli_query($conn, "SELECT * FROM appointments WHERE id=$id");
+$row = mysqli_fetch_assoc($result);
+
+if ($_SERVER['REQUEST_METHOD'] == "POST") {
+    $name = $_POST['patient_name'];
+    $date = $_POST['date'];
+    $time = $_POST['time'];
+    $doctor = $_POST['doctor'];
+
+    mysqli_query($conn, "UPDATE appointments SET patient_name='$name', date_a='$date', time_a='$time', doctor='$doctor' WHERE id=$id");
+    header("Location: view.php");
+    exit;
 }
 ?>
+
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Edit Appointment</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+
+<body style="background: linear-gradient(to right, #cfd9df, #e2ebf0);">
+
+    <div class="container mt-5">
+        <div class="card shadow-lg rounded-4">
+            <div class="card-header bg-info text-white text-center fs-4">Edit Appointment</div>
+            <div class="card-body">
+                <form method="POST">
+                    <div class="mb-3">
+                        <label>Patient Name</label>
+                        <input type="text" name="patient_name" class="form-control" value="<?= $row['patient_name'] ?>" required>
+                    </div>
+                    <div class="mb-3">
+                        <label>Date</label>
+                        <input type="date" name="date" class="form-control" value="<?= $row['date_a'] ?>" required>
+                    </div>
+                    <div class="mb-3">
+                        <label>Time</label>
+                        <input type="time" name="time" class="form-control" value="<?= $row['time_a'] ?>" required>
+                    </div>
+                    <div class="mb-3">
+                        <label>Doctor</label>
+                        <input type="text" name="doctor" class="form-control" value="<?= $row['doctor'] ?>" required>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Update</button>
+                    <a href="view.php" class="btn btn-secondary">Back</a>
+                </form>
+            </div>
+        </div>
+    </div>
+
+</body>
+
+</html>
