@@ -9,21 +9,19 @@ if ($conn->connect_error) {
 
 // Get the ID from the URL
 $id = $_GET["id"] ?? null;
-
 if (!$id) {
     die("❌ Medicine ID not provided.");
 }
 
 // Handle form submission
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    $name = $_POST["name"];
-    $category = $_POST["category"];
-    $quantity = $_POST["quantity"];
-    $price = $_POST["price"];
+    // Sanitize input
+    $name = $conn->real_escape_string($_POST["name"]);
+    $quantity = (int) $_POST["quantity"];
+    $price = (float) $_POST["price"];
 
     $update_sql = "UPDATE medicines SET 
                     name='$name', 
-                    category='$category', 
                     quantity='$quantity', 
                     price='$price' 
                   WHERE id=$id";
@@ -37,10 +35,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     }
 }
 
-// Load existing data
+// Load existing medicine data
 $sql = "SELECT * FROM medicines WHERE id = $id";
 $result = $conn->query($sql);
-
 if ($result->num_rows != 1) {
     die("❌ Medicine not found.");
 }
@@ -52,14 +49,10 @@ $medicine = $result->fetch_assoc();
 <html>
 <head>
     <title>Edit Medicine</title>
-<<<<<<< HEAD
     <style>
-=======
-     <style>
->>>>>>> 8783693 (Updated add, edit, view medicine files and SQL with inline CSS)
         body {
             font-family: 'Segoe UI', sans-serif;
-            background-color: #d0e7ff; /* Light blue */
+            background-color: #d0e7ff;
             display: flex;
             justify-content: center;
             align-items: center;
@@ -106,7 +99,7 @@ $medicine = $result->fetch_assoc();
             box-shadow: 0 0 5px rgba(0,123,255,0.4);
         }
 
-        input[type="submit"] {
+        button[type="submit"] {
             width: 100%;
             background-color: #007bff;
             color: white;
@@ -118,25 +111,23 @@ $medicine = $result->fetch_assoc();
             transition: 0.3s;
         }
 
-        input[type="submit"]:hover {
+        button[type="submit"]:hover {
             background-color: #0056b3;
         }
     </style>
 </head>
 <body>
-    <h2>Edit Medicine</h2>
     <form method="POST">
-        <label>Name:</label><br>
-        <input type="text" name="name" value="<?= $medicine['name'] ?>" required><br><br>
+        <h2>Edit Medicine</h2>
 
-        <label>Category:</label><br>
-        <input type="text" name="category" value="<?= $medicine['category'] ?>" required><br><br>
+        <label>Name:</label>
+        <input type="text" name="name" value="<?= htmlspecialchars($medicine['name']) ?>" required>
 
-        <label>Quantity:</label><br>
-        <input type="number" name="quantity" value="<?= $medicine['quantity'] ?>" required><br><br>
+        <label>Quantity:</label>
+        <input type="number" name="quantity" value="<?= htmlspecialchars($medicine['quantity']) ?>" required>
 
-        <label>Price (₹):</label><br>
-        <input type="number" step="0.01" name="price" value="<?= $medicine['price'] ?>" required><br><br>
+        <label>Price (₹):</label>
+        <input type="number" step="0.01" name="price" value="<?= htmlspecialchars($medicine['price']) ?>" required>
 
         <button type="submit">Update Medicine</button>
     </form>
