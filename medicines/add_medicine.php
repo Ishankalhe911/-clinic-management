@@ -8,12 +8,11 @@ if ($conn->connect_error) {
 // Handle form submission
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $name = $_POST["name"];
-    $category = $_POST["category"];
     $quantity = $_POST["quantity"];
     $price = $_POST["price"];
 
-    $sql = "INSERT INTO medicines (name, category, quantity, price) 
-            VALUES ('$name', '$category', '$quantity', '$price')";
+    $sql = "INSERT INTO medicines (name, quantity, price) 
+            VALUES ('$name', '$quantity', '$price')";
 
     if ($conn->query($sql) === TRUE) {
         echo "<p style='color: green; font-weight: bold;'>✅ Medicine added successfully!</p>";
