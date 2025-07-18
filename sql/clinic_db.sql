@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jul 18, 2025 at 09:42 PM
+-- Generation Time: Jul 18, 2025 at 11:32 PM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -86,7 +86,10 @@ CREATE TABLE `checkups` (
 INSERT INTO `checkups` (`id`, `patient_id`, `symptoms`, `history`, `report_path`, `date`, `diagnosis`, `checkup_date`, `doctor_name`) VALUES
 (1, 1, 'Fever, cough, body ache', 'Allergic to penicillin\r\n\r\n', '', '2025-07-16 19:30:00', NULL, NULL, NULL),
 (2, 1, 'sample', 'sample', '', '2025-07-16 01:07:00', NULL, NULL, NULL),
-(4, 1, 'sample4', 'sample4', '', '2025-07-11 11:26:00', NULL, NULL, NULL);
+(4, 1, 'sample4', 'sample4', '', '2025-07-11 11:26:00', NULL, NULL, NULL),
+(5, 6, 'sample 6', 'sddd', '', '2025-07-10 13:41:00', NULL, NULL, NULL),
+(6, 4, 'sample 5', '-', 'uploads/1752871576_sample doc.txt', '2025-07-04 13:46:00', NULL, NULL, NULL),
+(7, 11, 'sample7', '-', 'uploads/1752871670_sample doc.txt', '2025-07-29 13:47:00', NULL, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -113,7 +116,7 @@ INSERT INTO `medicines` (`id`, `name`, `price`, `stock`, `medicine_id`, `quantit
 (2, 'Dolo', 75.00, 75, 0, 0, '2025-07-18 12:42:35'),
 (3, 'Paracetamol', 100.00, 100, 0, 0, '2025-07-18 12:42:35'),
 (4, 'Crosin', 55.00, 60, 0, 0, '2025-07-18 12:42:35'),
-(5, 'Zerodol-P', 50.00, 50, 0, 0, '2025-07-18 12:42:35');
+(5, 'Zerodol-P', 50.00, 50, 0, 100, '2025-07-18 12:42:35');
 
 -- --------------------------------------------------------
 
@@ -173,7 +176,13 @@ INSERT INTO `prescriptions` (`id`, `checkup_id`, `medicine_id`, `medicine_name`,
 (4, 1, 2, NULL, NULL, NULL, 2),
 (5, 1, 1, NULL, NULL, NULL, 1),
 (6, 1, 1, NULL, NULL, NULL, 1),
-(7, 1, 1, NULL, NULL, NULL, 2);
+(7, 1, 1, NULL, NULL, NULL, 2),
+(8, 1, 1, NULL, NULL, NULL, 1),
+(9, 1, 0, 'dolo', '500mg', '5days', 1),
+(10, 11, 0, 'dolo', '500mg', '5days', 1),
+(11, 1, 1, NULL, NULL, NULL, 1),
+(12, 7, 1, NULL, NULL, NULL, 2),
+(13, 2, 2, NULL, NULL, NULL, 2);
 
 -- --------------------------------------------------------
 
@@ -242,7 +251,7 @@ ALTER TABLE `bills`
 -- AUTO_INCREMENT for table `checkups`
 --
 ALTER TABLE `checkups`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT for table `medicines`
@@ -260,7 +269,7 @@ ALTER TABLE `patients`
 -- AUTO_INCREMENT for table `prescriptions`
 --
 ALTER TABLE `prescriptions`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 
 --
 -- AUTO_INCREMENT for table `reports`
