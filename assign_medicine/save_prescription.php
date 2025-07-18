@@ -12,7 +12,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 VALUES ('$checkup_id', '$medicine_id', '$quantity')";
 
         if (mysqli_query($conn, $sql)) {
-            echo "<script>alert('💊 Medicine assigned successfully!'); window.location.href='assign_medicine.php';</script>";
+          header("Location: assign_medicine.php?success=1");
+exit();
+
         } else {
             echo "❌ Error: " . mysqli_error($conn);
         }
