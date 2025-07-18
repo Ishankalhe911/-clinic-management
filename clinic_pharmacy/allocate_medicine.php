@@ -1,7 +1,7 @@
 <?php
 include 'db_connect.php';
 
-
+// मेडिसिन लिस्ट घेण्यासाठी
 $medicines_sql = "SELECT medicine_id, name FROM medicines ORDER BY name ASC";
 $medicines_result = $conn->query($medicines_sql);
 ?>
