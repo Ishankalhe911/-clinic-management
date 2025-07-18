@@ -78,7 +78,6 @@ $result = $conn->query($sql);
     <tr>
         <th>ID</th>
         <th>Name</th>
-        <th>Category</th>
         <th>Quantity</th>
         <th>Price (₹)</th>
         <th>Created At</th>
@@ -88,7 +87,6 @@ $result = $conn->query($sql);
     <tr>
         <td><?= htmlspecialchars($row["id"]) ?></td>
         <td><?= htmlspecialchars($row["name"]) ?></td>
-        <td><?= htmlspecialchars($row["category"]) ?></td>
         <td><?= htmlspecialchars($row["quantity"]) ?></td>
         <td><?= htmlspecialchars($row["price"]) ?></td>
         <td><?= htmlspecialchars($row["created_at"]) ?></td>
