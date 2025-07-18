@@ -1,10 +1,5 @@
 <?php
 include('../includes/db_connect.php');
-if (isset($_GET['success']) && $_GET['success'] == 1) {
-    echo "<div style='background-color: #d4edda; padding: 10px; color: #155724; border: 1px solid #c3e6cb; border-radius: 5px; margin-bottom: 10px;'>💊 Medicine assigned successfully!</div>";
-}
-?>
-
 
 // Fetch checkups
 $checkup_query = "SELECT id, date FROM checkups";
@@ -18,33 +13,40 @@ $medicines = mysqli_query($conn, $medicine_query);
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Assign Medicine</title>
+    <title>Assign Medicine to Checkup</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
 </head>
-<body>
-    <h2>Assign Medicine to Checkup</h2>
+<body class="bg-light">
+    <div class="container mt-5">
+        <h2 class="mb-4">Assign Medicine to Checkup</h2>
+        <form action="save_prescription.php" method="POST" class="p-4 shadow bg-white rounded">
+            <div class="mb-3">
+                <label for="checkup_id" class="form-label">Select Checkup:</label>
+                <select name="checkup_id" class="form-select" required>
+                    <option value="">-- Select Checkup --</option>
+                    <?php while ($row = mysqli_fetch_assoc($checkups)) { ?>
+                        <option value="<?= $row['id'] ?>">Checkup #<?= $row['id'] ?> (<?= $row['date'] ?>)</option>
+                    <?php } ?>
+                </select>
+            </div>
 
-    <form action="save_prescription.php" method="POST">
-        <label for="checkup_id">Select Checkup:</label>
-        <select name="checkup_id" required>
-            <option value="">-- Select --</option>
-            <?php while($row = mysqli_fetch_assoc($checkups)) { ?>
-                <option value="<?= $row['id'] ?>">Checkup #<?= $row['id'] ?> (<?= $row['date'] ?>)</option>
-            <?php } ?>
-        </select><br><br>
+            <div class="mb-3">
+                <label for="medicine_id" class="form-label">Select Medicine:</label>
+                <select name="medicine_id" class="form-select" required>
+                    <option value="">-- Select Medicine --</option>
+                    <?php while ($row = mysqli_fetch_assoc($medicines)) { ?>
+                        <option value="<?= $row['id'] ?>"><?= $row['name'] ?></option>
+                    <?php } ?>
+                </select>
+            </div>
 
-        <label for="medicine_id">Select Medicine:</label>
-        <select name="medicine_id" required>
-            <option value="">-- Select --</option>
-            <?php while($row = mysqli_fetch_assoc($medicines)) { ?>
-                <option value="<?= $row['id'] ?>"><?= $row['name'] ?></option>
-            <?php } ?>
-        </select><br><br>
+            <div class="mb-3">
+                <label for="quantity" class="form-label">Quantity:</label>
+                <input type="number" name="quantity" class="form-control" required min="1">
+            </div>
 
-        <label for="quantity">Quantity:</label>
-        <input type="number" name="quantity" required><br><br>
-
-        <button type="submit">Assign Medicine</button>
-    </form>
+            <button type="submit" class="btn btn-primary">Assign Medicine</button>
+        </form>
+    </div>
 </body>
 </html>
-
