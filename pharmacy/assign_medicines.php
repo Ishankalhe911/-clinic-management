@@ -12,7 +12,7 @@
 </head>
 <body>
     <h2>Assign Medicines to Patient</h2>
-    <form method="POST">
+    <center><form method="POST">
         <label>Patient ID:</label>
         <input type="text" name="patient_id" required>
 
@@ -20,7 +20,7 @@
         <textarea name="medicines" rows="3" required></textarea>
 
         <input type="submit" name="assign" value="Assign">
-    </form>
+    </form></center>
 
     <?php
     if (isset($_POST['assign'])) {
