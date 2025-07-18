@@ -1,5 +1,10 @@
 <?php
 include('../includes/db_connect.php');
+if (isset($_GET['success']) && $_GET['success'] == 1) {
+    echo "<div style='background-color: #d4edda; padding: 10px; color: #155724; border: 1px solid #c3e6cb; border-radius: 5px; margin-bottom: 10px;'>💊 Medicine assigned successfully!</div>";
+}
+?>
+
 
 // Fetch checkups
 $checkup_query = "SELECT id, date FROM checkups";
