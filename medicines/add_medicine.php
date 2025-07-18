@@ -91,9 +91,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             <label>Name:</label>
             <input type="text" name="name" required>
 
-            <label>Category:</label>
-            <input type="text" name="category" required>
-
             <label>Quantity:</label>
             <input type="number" name="quantity" required>
 
