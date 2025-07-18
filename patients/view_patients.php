@@ -125,7 +125,7 @@ h2 {
     </tr>
 
     <?php
-    $conn = new mysqli("localhost", "root", "", "clinic");
+   $conn = new mysqli("localhost", "root", "", "clinic_db");
     $sql = "SELECT * FROM patients";
     $result = $conn->query($sql);
 
