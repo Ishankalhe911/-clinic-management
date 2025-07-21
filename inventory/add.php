@@ -1,4 +1,41 @@
-<?php include 'db.php'; ?>
+<?php
+// Connect to the database
+$conn = new mysqli("localhost", "root", "", "clinic_db");
+if ($conn->connect_error) {
+    die("Connection failed: " . $conn->connect_error);
+}
+
+if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+    $name = trim($_POST['name']);
+    $quantity = (int)$_POST['quantity'];
+    $price = (float)$_POST['price'];
+
+    // Basic validation
+    if ($name === '' || $quantity <= 0 || $price < 0) {
+        die("Invalid input data. Please check your entries.");
+    }
+
+    // Prepare and bind
+    $stmt = $conn->prepare("INSERT INTO products (name, quantity, price) VALUES (?, ?, ?)");
+    if (!$stmt) {
+        die("Prepare failed: " . $conn->error);
+    }
+
+    $stmt->bind_param("sid", $name, $quantity, $price);
+
+    if ($stmt->execute()) {
+        // Redirect after successful insertion
+        header("Location: index.php");
+        exit();
+    } else {
+        echo "Error inserting product: " . $stmt->error;
+    }
+
+    $stmt->close();
+}
+
+$conn->close();
+?>
 <?php
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
   $name = $_POST['name'];
