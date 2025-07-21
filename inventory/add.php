@@ -1,13 +1,49 @@
-<?php include 'db.php'; ?>
 <?php
-if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-  $name = $_POST['name'];
-  $quantity = $_POST['quantity'];
-  $price = $_POST['price'];
+// Database connection settings
+$host = "localhost";
+$user = "root";
+$pass = "";
+$dbname = "clinic_db";  // connect to clinic_db
 
-  $conn->query("INSERT INTO products (name, quantity, price) VALUES ('$name', $quantity, $price)");
-  header("Location: index.php");
+// Create connection
+$conn = new mysqli($host, $user, $pass, $dbname);
+
+// Check connection
+if ($conn->connect_error) {
+    die("Connection failed: " . $conn->connect_error);
 }
+
+// Handle form submission
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    $name = trim($_POST['name']);
+    $quantity = (int)$_POST['quantity'];
+    $price = (float)$_POST['price'];
+
+    if ($quantity <= 0 || $price < 0) {
+        die("Quantity must be positive and price cannot be negative.");
+    }
+
+    // Prepare and bind statement
+    $stmt = $conn->prepare("INSERT INTO products (name, quantity, price) VALUES (?, ?, ?)");
+    if (!$stmt) {
+        die("Prepare failed: " . $conn->error);
+    }
+
+    $stmt->bind_param("sid", $name, $quantity, $price);
+
+    if ($stmt->execute()) {
+        header("Location: index.php");
+        exit();
+    } else {
+        echo "Error inserting product: " . $stmt->error;
+    }
+
+    $stmt->close();
+}
+
+}
+
+$conn->close();
 ?>
 <!DOCTYPE html>
 <html>
