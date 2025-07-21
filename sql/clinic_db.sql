@@ -151,6 +151,47 @@ INSERT INTO `patients` (`id`, `name`, `Age`, `Gender`, `phone`) VALUES
 
 -- --------------------------------------------------------
 
+-- --------------------------------------------------------
+
+--
+-- Table structure for table products
+--
+
+CREATE TABLE products (
+  id int(11) NOT NULL,
+  name varchar(100) DEFAULT NULL,
+  quantity int(11) DEFAULT NULL,
+  price decimal(10,2) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table products
+--
+
+INSERT INTO products (id, name, quantity, price) VALUES
+(2, 'pc', 10, 300000.00);
+
+--
+-- Indexes for dumped tables
+--
+
+--
+-- Indexes for table products
+--
+ALTER TABLE products
+  ADD PRIMARY KEY (id);
+
+--
+-- AUTO_INCREMENT for dumped tables
+--
+
+--
+-- AUTO_INCREMENT for table products
+--
+ALTER TABLE products
+  MODIFY id int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+COMMIT;
+
 --
 -- Table structure for table `prescriptions`
 --
