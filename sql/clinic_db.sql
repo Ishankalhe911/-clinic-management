@@ -331,6 +331,34 @@ ALTER TABLE `products`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 
+-- Adding foreign key constraints for data integrity
+
+ALTER TABLE checkups
+  ADD CONSTRAINT fk_checkups_patient
+  FOREIGN KEY (patient_id) REFERENCES patients(id);
+
+ALTER TABLE prescriptions
+  ADD CONSTRAINT fk_prescriptions_checkup
+  FOREIGN KEY (checkup_id) REFERENCES checkups(id);
+
+ALTER TABLE prescriptions
+  ADD CONSTRAINT fk_prescriptions_medicine
+  FOREIGN KEY (medicine_id) REFERENCES medicines(id);
+
+ALTER TABLE billing
+  ADD CONSTRAINT fk_billing_checkup
+  FOREIGN KEY (checkup_id) REFERENCES checkups(id);
+
+ALTER TABLE bills
+  ADD CONSTRAINT fk_bills_checkup
+  FOREIGN KEY (checkup_id) REFERENCES checkups(id);
+
+ALTER TABLE reports
+  ADD CONSTRAINT fk_reports_checkup
+  FOREIGN KEY (checkup_id) REFERENCES checkups(id);
+
+
+
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
