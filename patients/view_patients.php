@@ -110,12 +110,30 @@ h2 {
         color: #ff00d4;
         text-shadow: 0 0 5px #ff00d4;
     }
+           .not-found {
+      text-align: center;
+      color: red;
+      padding: 20px;
+    }
+           .container {
+      max-width: 800px;
+      margin: auto;
+      background: #fff;
+      padding: 20px;
+      border-radius: 12px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    }
+            h2 {
+      text-align: center;
+      color: #333;
+    }
     </style>
 </head>
 <body>
     <h2>Patients List</h2>
-   <label for="search pateint">search pateint</label>
-<input type="search" id name="name" placeholder="search pateint name">
+  <div class="container">
+    <h2>Search Patient</h2>
+    <input type="text" id="searchInput" onkeyup="searchPatient()" placeholder="Search by name or ID...">
  <table border="1">
     <tr>
         <th>ID</th>
@@ -149,6 +167,8 @@ h2 {
     }
     ?>
 </table>
-
+    <div class="not-found" id="noResult" style="display: none;">
+      No matching patient found.
+    </div>
 </body>
 </html>
