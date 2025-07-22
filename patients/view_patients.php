@@ -114,6 +114,8 @@ h2 {
 </head>
 <body>
     <h2>Patients List</h2>
+   <label for="search pateint">search pateint</label>
+<input type="search" id name="name" placeholder="search pateint name">
  <table border="1">
     <tr>
         <th>ID</th>
