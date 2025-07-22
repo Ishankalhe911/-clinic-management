@@ -123,7 +123,7 @@ h2 {
       border-radius: 12px;
       box-shadow: 0 0 10px rgba(0,0,0,0.1);
     }
-            h2 {
+            h3 {
       text-align: center;
       color: #333;
     }
@@ -132,7 +132,7 @@ h2 {
 <body>
     <h2>Patients List</h2>
   <div class="container">
-    <h2>Search Patient</h2>
+    <h3>Search Patient</h3>
     <input type="text" id="searchInput" onkeyup="searchPatient()" placeholder="Search by name or ID...">
  <table border="1">
     <tr>
